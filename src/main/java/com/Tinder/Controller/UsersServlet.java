@@ -1,4 +1,4 @@
-package org.danit.Tinder;
+package com.Tinder.Controller;
 
 import lombok.SneakyThrows;
 
@@ -12,14 +12,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class UsersServlet extends HttpServlet {
-
-  /**
-   * http://localhost:8080/hello
-   */
   @SneakyThrows
   @Override
   protected void doGet(HttpServletRequest rq, HttpServletResponse rs) throws ServletException, IOException {
-    String path = getClass().getClassLoader().getResource("people-list.html").toURI().getPath();
+    String path = getClass().getClassLoader().getResource("templates/people-list.html").toURI().getPath();
     try (
       BufferedReader br = new BufferedReader(new FileReader(path));
       PrintWriter w = rs.getWriter()
