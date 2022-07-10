@@ -12,17 +12,15 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class UsersServlet extends HttpServlet {
+  private TemplateEngine templateEngine;
+
+  public UsersServlet(TemplateEngine templateEngine) {
+    this.templateEngine = templateEngine;
+  }
   @SneakyThrows
   @Override
-  protected void doGet(HttpServletRequest rq, HttpServletResponse rs) throws ServletException, IOException {
-    String path = getClass().getClassLoader().getResource("templates/people-list.html").toURI().getPath();
-    try (
-      BufferedReader br = new BufferedReader(new FileReader(path));
-      PrintWriter w = rs.getWriter()
-    ) {
-      br.lines()
-        .forEach(w::println);
-    }
+  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    templateEngine.render("users.ftl", resp);
   }
 
 }
