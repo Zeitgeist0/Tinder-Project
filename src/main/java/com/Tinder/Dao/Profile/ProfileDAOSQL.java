@@ -11,10 +11,10 @@ public class ProfileDAOSQL implements ProfileDAO {
   private PGPoolingDataSource source;
   public ProfileDAOSQL() {
     source = new PGPoolingDataSource();
-    source.setServerName("ec2-35-170-239-232.compute-1.amazonaws.com");
-    source.setDatabaseName("demcjnf96hduah");
-    source.setUser("disxdmkwvmnzbs");
-    source.setPassword("9a89674865e3e5c673e5a63128de5bd2b4f5d4653d9a1b22d2694d812202e1ec");
+    source.setServerName("ec2-54-75-184-144.eu-west-1.compute.amazonaws.com");
+    source.setDatabaseName("d22gk09uc1becd");
+    source.setUser("sogwsxurybiycc");
+    source.setPassword("4c318dde4c760f7dd53fcf14cedac9ecc2d709c5849ffceeb576a1208bb02750");
     source.setMaxConnections(20);
   }
   @SneakyThrows
@@ -53,7 +53,7 @@ public class ProfileDAOSQL implements ProfileDAO {
   Connection connection = null;
   try {
     connection = source.getConnection();
-    PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM profile");
+    PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM public.profile");
     ResultSet resultSet = preparedStatement.executeQuery();
     while(resultSet.next()) {
       long id = resultSet.getLong("id");
