@@ -3,6 +3,9 @@ package com.Tinder;
 import com.Tinder.Controller.FileServlet;
 import com.Tinder.Controller.TemplateEngine;
 import com.Tinder.Controller.UsersServlet;
+import com.Tinder.Dao.Profile.ProfileDAO;
+import com.Tinder.Dao.Profile.ProfileDAOSQL;
+import com.Tinder.Service.Profile.ProfileServiceSQL;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
@@ -18,8 +21,9 @@ public class JettyRun {
     Server server = new Server(port);
     TemplateEngine templateEngine = new TemplateEngine();
     ServletContextHandler handler = new ServletContextHandler();
-
-    handler.addServlet(new ServletHolder(new UsersServlet(templateEngine)), "/users");
+    final ProfileDAO profileDAO = new ProfileDAOSQL();
+    ProfileServiceSQL profileServiceSQL = new ProfileServiceSQL(profileDAO);
+    handler.addServlet(new ServletHolder(new UsersServlet(templateEngine, profileServiceSQL)), "/users");
     handler.addServlet(new ServletHolder(new FileServlet()), "/assets/*");
 
     server.setHandler(handler);
