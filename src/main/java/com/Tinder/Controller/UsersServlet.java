@@ -22,5 +22,7 @@ public class UsersServlet extends HttpServlet {
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     templateEngine.render("users.ftl", resp);
   }
-
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    templateEngine.render("users.ftl", resp);
+  }
 }
