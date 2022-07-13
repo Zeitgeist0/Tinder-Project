@@ -1,6 +1,7 @@
 package com.Tinder;
 
 import com.Tinder.Controller.FileServlet;
+import com.Tinder.Controller.LikedServlet;
 import com.Tinder.Controller.TemplateEngine;
 import com.Tinder.Controller.UsersServlet;
 import com.Tinder.Dao.Liked.LikedDAO;
@@ -32,7 +33,7 @@ public class JettyRun {
 
     handler.addServlet(new ServletHolder(new UsersServlet(templateEngine, profileServiceSQL, likedServiceSQL)), "/users");
     handler.addServlet(new ServletHolder(new FileServlet()), "/assets/*");
-
+    handler.addServlet(new ServletHolder(new LikedServlet(templateEngine, profileServiceSQL, likedServiceSQL)), "/liked");
     server.setHandler(handler);
     server.start();
     server.join();
