@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class UsersServlet extends HttpServlet {
   private TemplateEngine templateEngine;
@@ -38,10 +39,11 @@ private  LikedServiceSQL likedServiceSQL;
 String likerId = req.getParameter("likerId");
 String likedId = req.getParameter("likedId");
 String action = req.getParameter("action");
+    System.out.println(action);
 int likerToInt = Integer.parseInt(likerId);
     int likedToInt = Integer.parseInt(likedId);
     boolean didLike;
-  if (action == "like")
+  if (action.equals("like"))
   {
     didLike = true;
     likedServiceSQL.like(likerToInt,likedToInt,didLike);
