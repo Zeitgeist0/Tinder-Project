@@ -27,7 +27,7 @@ public class LikedDAOSQL implements LikedDAO{
     Connection connection = null;
     try {
       connection = source.getConnection();
-      PreparedStatement preparedStatement = connection.prepareStatement("insert into liked (likerId, likedId, didLike) values (? , ?, ?)");
+      PreparedStatement preparedStatement = connection.prepareStatement("insert into liked (\"likerId\", \"likedId\", \"didLike\") values (? , ?, ?)");
       preparedStatement.setLong(1, likerId);
       preparedStatement.setLong(2, likedId);
       preparedStatement.setBoolean(3, didLike);

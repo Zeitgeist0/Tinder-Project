@@ -1,6 +1,7 @@
 package com.Tinder.Controller;
 
 import com.Tinder.Dao.Profile.Profile;
+import com.Tinder.Service.Liked.LikedServiceSQL;
 import com.Tinder.Service.Profile.ProfileServiceSQL;
 import lombok.SneakyThrows;
 
@@ -18,10 +19,11 @@ import java.util.List;
 public class UsersServlet extends HttpServlet {
   private TemplateEngine templateEngine;
 private ProfileServiceSQL profileServiceSQL;
-
-  public UsersServlet(TemplateEngine templateEngine, ProfileServiceSQL profileServiceSQL) {
+private  LikedServiceSQL likedServiceSQL;
+  public UsersServlet(TemplateEngine templateEngine, ProfileServiceSQL profileServiceSQL , LikedServiceSQL likedServiceSQL) {
     this.templateEngine = templateEngine;
     this.profileServiceSQL = profileServiceSQL;
+    this.likedServiceSQL = likedServiceSQL;
   }
   @SneakyThrows
   @Override
@@ -35,7 +37,22 @@ private ProfileServiceSQL profileServiceSQL;
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 String likerId = req.getParameter("likerId");
 String likedId = req.getParameter("likedId");
-String didLike = req.getParameter("didLike");
-    templateEngine.render("users.ftl", resp);
+String action = req.getParameter("action");
+int likerToInt = Integer.parseInt(likerId);
+    int likedToInt = Integer.parseInt(likedId);
+    boolean didLike;
+  if (action == "like")
+  {
+    didLike = true;
+    likedServiceSQL.like(likerToInt,likedToInt,didLike);
+  } else {
+    didLike = false;
+    likedServiceSQL.like(likerToInt,likedToInt,didLike);
+  }
+    HashMap<String, Object> data = new HashMap<>();
+    List<Profile> profiles = profileServiceSQL.findNotLiked(1);
+    Profile profile = profiles.get(0);
+    data.put("profile", profile);
+    templateEngine.render("users.ftl", data, resp);
   }
 }

@@ -30,7 +30,7 @@ public class JettyRun {
     final LikedDAO likedDAO = new LikedDAOSQL();
     LikedServiceSQL likedServiceSQL = new LikedServiceSQL(likedDAO);
 
-    handler.addServlet(new ServletHolder(new UsersServlet(templateEngine, profileServiceSQL)), "/users");
+    handler.addServlet(new ServletHolder(new UsersServlet(templateEngine, profileServiceSQL, likedServiceSQL)), "/users");
     handler.addServlet(new ServletHolder(new FileServlet()), "/assets/*");
 
     server.setHandler(handler);
