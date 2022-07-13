@@ -25,12 +25,12 @@
                   Profiles
                 </div>
                 <div class="panel-body">
-                    Name:  <p>${profile.name}</p>
-                    Age: <p>${profile.age}</p>
+                    <p>${profile.name}</p>
+                     <p>${profile.age}</p>
                     <img src="${profile.photo}" >
 
                     <form action="/users" method="post"> <#--"/registration"-->
-<#--                        likerId: <input type="hidden" name="likerId" value="${user.id}"  /> <br/>-->
+                        likerId: <input type="hidden" name="likerId" value=1  /> <br/>
                         <input type="hidden" name="likedId" value="${profile.id}"  /> <br/>
                         <button type="submit" name="action" value="like">Like</button>
                         <button type="submit" name="action" value="dislike">Dislike</button>

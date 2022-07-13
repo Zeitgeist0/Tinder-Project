@@ -20,4 +20,9 @@ public class ProfileServiceSQL implements ProfileService{
   public List<Profile> findAll() {
     return  profileDAO.findAll();
   }
+
+  @Override
+  public List<Profile> findNotLiked(int profileId) {
+    return profileDAO.findNotLiked(profileId);
+  }
 }

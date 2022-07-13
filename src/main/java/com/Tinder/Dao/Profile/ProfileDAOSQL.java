@@ -75,4 +75,33 @@ public class ProfileDAOSQL implements ProfileDAO {
   }
   return profiles;
 }
+
+public List<Profile> findNotLiked (int profileId) {
+  List<Profile> profiles = new ArrayList<>();
+  Connection connection = null;
+  try {
+    connection = source.getConnection();
+    PreparedStatement preparedStatement = connection.prepareStatement("select * from profile where \"id\" not in (select \"likedId\" from liked where \"likerId\" = ? );");
+    preparedStatement.setLong(1, profileId);
+    ResultSet resultSet = preparedStatement.executeQuery();
+    while(resultSet.next()) {
+      long id = resultSet.getLong("id");
+      int age = resultSet.getInt("age");
+      String photo = resultSet.getString("photo");
+      String name = resultSet.getString("name");
+      profiles.add( new Profile(id,name,photo,age));
+    }
+  } catch (SQLException e) {
+    e.printStackTrace();
+  } finally {
+    if (connection != null) {
+      try {
+        connection.close();
+      } catch (SQLException ex) {
+        ex.printStackTrace();
+      }
+    }
+  }
+  return profiles;
+}
 };

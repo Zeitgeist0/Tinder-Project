@@ -27,12 +27,13 @@ private ProfileServiceSQL profileServiceSQL;
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     HashMap<String, Object> data = new HashMap<>();
-    List<Profile> profiles = profileServiceSQL.findAll();
-    Profile profile = profiles.get(1);
+    List<Profile> profiles = profileServiceSQL.findNotLiked(1);
+    Profile profile = profiles.get(0);
     data.put("profile", profile);
     templateEngine.render("users.ftl", data, resp);
   }
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
     templateEngine.render("users.ftl", resp);
   }
 }
