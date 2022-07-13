@@ -33,7 +33,9 @@ private ProfileServiceSQL profileServiceSQL;
     templateEngine.render("users.ftl", data, resp);
   }
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+String likerId = req.getParameter("likerId");
+String likedId = req.getParameter("likedId");
+String didLike = req.getParameter("didLike");
     templateEngine.render("users.ftl", resp);
   }
 }
