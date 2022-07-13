@@ -7,41 +7,48 @@
     <meta name="author" content="">
     <link rel="icon" href="img/favicon.ico">
 
-    <title>People list</title>
+    <title>Like page</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link href="/assets/bootstrap.min.css" rel="stylesheet">
+
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="/assets/style.css">
 </head>
-<body>
+<body style="background-color: #f5f5f5;">
 
-<div class="container">
-    <div class="row">
-        <div class="col-8 offset-2">
-            <div class="panel panel-default user_panel">
-                <div class="panel-heading">
-                  Profiles
+<div class="col-4 offset-4">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12 col-lg-12 col-md-12 text-center">
+                    <img src="${profile.photo}" alt="" class="mx-auto rounded-circle img-fluid">
+
+                    <h3 class="mb-0 text-truncated">${profile.name} ${profile.age}</h3>
+                    <br>
                 </div>
-                <div class="panel-body">
-                    <p>${profile.name}</p>
-                     <p>${profile.age}</p>
-                    <img src="${profile.photo}" >
+                <div class="col-12 col-lg-6">
 
                     <form action="/users" method="post"> <#--"/registration"-->
-                        likerId: <input type="hidden" name="likerId" value=1  /> <br/>
+                         <input type="hidden" name="likerId" value=1  /> <br/>
                         <input type="hidden" name="likedId" value="${profile.id}"  /> <br/>
-                        <button type="submit" name="action" value="like">Like</button>
-                        <button type="submit" name="action" value="dislike">Dislike</button>
+                        <button type="submit" name="action" value="dislike" class="btn btn-outline-danger btn-block"><span class="fa fa-times"></span> Dislike</button>
                     </form>
-
-                    </div>
                 </div>
+                <div class="col-12 col-lg-6">
+                    <form action="/users" method="post"> <#--"/registration"-->
+                         <input type="hidden" name="likerId" value=1  /> <br/>
+                        <input type="hidden" name="likedId" value="${profile.id}"  /> <br/>
+                        <button type="submit" name="action" value="like" class="btn btn-outline-success btn-block"><span class="fa fa-heart"></span> Like</button>
+                    </form>
+                </div>
+                <!--/col-->
             </div>
+            <!--/row-->
         </div>
+        <!--/card-block-->
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
 </body>
 </html>
