@@ -8,4 +8,5 @@ public interface ProfileService {
   Profile find(Long profileId);
   List<Profile> findAll();
   List<Profile> findNotLiked (int profileId);
+  Profile findByLoginPass(String login, String password);
 }

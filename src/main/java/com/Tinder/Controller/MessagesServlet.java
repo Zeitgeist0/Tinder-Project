@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -28,16 +29,19 @@ public class MessagesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //FIND SENDER!!!
+
+        HttpSession session = req.getSession();
+        long senderId = (long) session.getAttribute("id");
         int receiverId = Integer.parseInt(req.getPathInfo().substring(1));
-        List<Message> messages = messagesService.findUserToUserMessages(1, receiverId);
-        Profile senderProfile = profileService.find((long) 1);
+        List<Message> messages = messagesService.findUserToUserMessages((int) senderId, receiverId);
+        Profile senderProfile = profileService.find(senderId);
         Profile receiverProfile = profileService.find((long) receiverId);
 
         Map<String, Object> data = new HashMap<>(1);
         data.put("messages", messages);
         data.put("sender", senderProfile);
         data.put("receiver", receiverProfile);
-        data.put("senderId", 1);
+        data.put("senderId", senderId);
 
         templateEngine.render("messages.ftl", data, resp);
     }

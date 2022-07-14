@@ -16,7 +16,12 @@ public class Profile {
   String name;
   String photo;
   int age;
+  String email;
+  String password;
 
+  public long getId() {
+      return id;
+  }
   // f: ResultSet -> Student | Exception
   @SneakyThrows
   static Profile fromResultSet(ResultSet rs) {
@@ -24,6 +29,8 @@ public class Profile {
     String name = rs.getString("Name");
     String photo = rs.getString("Photo");
     int age = rs.getInt("Age");
-    return new Profile(id, name, photo, age);
+    String email = rs.getString("email");
+    String password = rs.getString("password");
+    return new Profile(id, name, photo, age, email, password);
   }
 }

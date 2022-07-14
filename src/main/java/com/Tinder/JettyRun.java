@@ -11,8 +11,13 @@ import com.Tinder.Service.MessagesJdbcService;
 import com.Tinder.Service.MessagesService;
 import com.Tinder.Service.Profile.ProfileServiceSQL;
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.session.SessionHandler;
+import org.eclipse.jetty.servlet.FilterHolder;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+
+import javax.servlet.DispatcherType;
+import java.util.EnumSet;
 
 
 public class JettyRun {
@@ -34,6 +39,11 @@ public class JettyRun {
     MessagesJdbcDao messagesJdbcDao = new MessagesJdbcDao();
     MessagesService messagesService = new MessagesJdbcService(messagesJdbcDao);
 
+    SessionHandler sessionHandler = new SessionHandler();
+    handler.setSessionHandler(sessionHandler);
+
+    handler.addServlet(new ServletHolder(new LoginServlet(profileServiceSQL, templateEngine)), "/login");
+    handler.addFilter(new FilterHolder(new LoginFilter(templateEngine, profileServiceSQL)), "/*", EnumSet.of(DispatcherType.REQUEST));
     handler.addServlet(new ServletHolder(new UsersServlet(templateEngine, profileServiceSQL, likedServiceSQL)), "/users");
     handler.addServlet(new ServletHolder(new FileServlet()), "/assets/*");
     handler.addServlet(new ServletHolder(new MessagesServlet(templateEngine, messagesService, profileServiceSQL)), "/messages/*");

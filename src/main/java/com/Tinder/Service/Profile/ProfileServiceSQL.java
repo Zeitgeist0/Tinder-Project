@@ -25,4 +25,8 @@ public class ProfileServiceSQL implements ProfileService{
   public List<Profile> findNotLiked(int profileId) {
     return profileDAO.findNotLiked(profileId);
   }
+
+  public Profile findByLoginPass(String login, String password) {
+    return profileDAO.findByLoginPass(login, password);
+  }
 }
