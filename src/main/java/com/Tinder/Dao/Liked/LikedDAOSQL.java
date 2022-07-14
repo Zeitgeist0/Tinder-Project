@@ -1,4 +1,4 @@
-package com.Tinder.dao.Liked;
+package com.Tinder.Dao.Liked;
 
 import org.postgresql.ds.PGPoolingDataSource;
 

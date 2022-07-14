@@ -1,15 +1,15 @@
 package com.Tinder;
 
 import com.Tinder.Controller.*;
-import com.Tinder.dao.Liked.LikedDAO;
-import com.Tinder.dao.Liked.LikedDAOSQL;
-import com.Tinder.dao.MessagesJdbcDao;
-import com.Tinder.dao.Profile.ProfileDAO;
-import com.Tinder.dao.Profile.ProfileDAOSQL;
-import com.Tinder.service.Liked.LikedServiceSQL;
-import com.Tinder.service.MessagesJdbcService;
-import com.Tinder.service.MessagesService;
-import com.Tinder.service.Profile.ProfileServiceSQL;
+import com.Tinder.Dao.Liked.LikedDAO;
+import com.Tinder.Dao.Liked.LikedDAOSQL;
+import com.Tinder.Dao.MessagesJdbcDao;
+import com.Tinder.Dao.Profile.ProfileDAO;
+import com.Tinder.Dao.Profile.ProfileDAOSQL;
+import com.Tinder.Service.Liked.LikedServiceSQL;
+import com.Tinder.Service.MessagesJdbcService;
+import com.Tinder.Service.MessagesService;
+import com.Tinder.Service.Profile.ProfileServiceSQL;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
@@ -36,7 +36,7 @@ public class JettyRun {
 
     handler.addServlet(new ServletHolder(new UsersServlet(templateEngine, profileServiceSQL, likedServiceSQL)), "/users");
     handler.addServlet(new ServletHolder(new FileServlet()), "/assets/*");
-    handler.addServlet(new ServletHolder(new MessagesServlet(templateEngine, messagesService)), "/messages/*");
+    handler.addServlet(new ServletHolder(new MessagesServlet(templateEngine, messagesService, profileServiceSQL)), "/messages/*");
     handler.addServlet(new ServletHolder(new LikedServlet(templateEngine, profileServiceSQL, likedServiceSQL)), "/liked");
     server.setHandler(handler);
     server.start();

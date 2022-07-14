@@ -1,7 +1,7 @@
-package com.Tinder.service;
+package com.Tinder.Service;
 
-import com.Tinder.dao.Message;
-import com.Tinder.dao.MessagesDao;
+import com.Tinder.Dao.Message;
+import com.Tinder.Dao.MessagesDao;
 
 import java.util.List;
 

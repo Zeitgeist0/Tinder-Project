@@ -1,7 +1,7 @@
 package com.Tinder.Controller;
 
-import com.Tinder.service.Liked.LikedServiceSQL;
-import com.Tinder.service.Profile.ProfileServiceSQL;
+import com.Tinder.Service.Liked.LikedServiceSQL;
+import com.Tinder.Service.Profile.ProfileServiceSQL;
 import lombok.SneakyThrows;
 
 import javax.servlet.ServletException;

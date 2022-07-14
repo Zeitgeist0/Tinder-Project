@@ -1,4 +1,4 @@
-package com.Tinder.dao;
+package com.Tinder.Dao;
 
 import org.postgresql.ds.PGPoolingDataSource;
 

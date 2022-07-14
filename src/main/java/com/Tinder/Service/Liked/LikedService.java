@@ -1,4 +1,4 @@
-package com.Tinder.service.Liked;
+package com.Tinder.Service.Liked;
 
 public interface LikedService {
     void like (int likerId, int likedId, boolean didLike);

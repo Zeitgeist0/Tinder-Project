@@ -1,4 +1,4 @@
-package com.Tinder.dao;
+package com.Tinder.Dao;
 
 import java.util.List;
 

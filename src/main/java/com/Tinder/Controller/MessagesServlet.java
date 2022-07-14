@@ -1,7 +1,9 @@
 package com.Tinder.Controller;
 
-import com.Tinder.dao.Message;
-import com.Tinder.service.MessagesService;
+import com.Tinder.Dao.Message;
+import com.Tinder.Dao.Profile.Profile;
+import com.Tinder.Service.MessagesService;
+import com.Tinder.Service.Profile.ProfileService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,10 +17,12 @@ import java.util.Map;
 public class MessagesServlet extends HttpServlet {
     private TemplateEngine templateEngine;
     private MessagesService messagesService;
+    private ProfileService profileService;
 
-    public MessagesServlet (TemplateEngine templateEngine, MessagesService messagesService) {
+    public MessagesServlet (TemplateEngine templateEngine, MessagesService messagesService, ProfileService profileService) {
         this.templateEngine = templateEngine;
         this.messagesService = messagesService;
+        this.profileService = profileService;
     }
 
     @Override
@@ -26,9 +30,15 @@ public class MessagesServlet extends HttpServlet {
         //FIND SENDER!!!
         int receiverId = Integer.parseInt(req.getPathInfo().substring(1));
         List<Message> messages = messagesService.findUserToUserMessages(1, receiverId);
+        Profile senderProfile = profileService.find((long) 1);
+        Profile receiverProfile = profileService.find((long) receiverId);
+
         Map<String, Object> data = new HashMap<>(1);
         data.put("messages", messages);
+        data.put("sender", senderProfile);
+        data.put("receiver", receiverProfile);
         data.put("senderId", 1);
+
         templateEngine.render("messages.ftl", data, resp);
     }
 

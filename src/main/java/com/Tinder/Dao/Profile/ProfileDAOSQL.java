@@ -1,4 +1,4 @@
-package com.Tinder.dao.Profile;
+package com.Tinder.Dao.Profile;
 
 import lombok.SneakyThrows;
 import org.postgresql.ds.PGPoolingDataSource;

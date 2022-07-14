@@ -1,6 +1,6 @@
-package com.Tinder.service.Profile;
+package com.Tinder.Service.Profile;
 
-import com.Tinder.dao.Profile.Profile;
+import com.Tinder.Dao.Profile.Profile;
 
 import java.util.List;
 
