@@ -1,16 +1,13 @@
 package com.Tinder.Dao.Liked;
 
-import com.Tinder.Dao.Profile.Profile;
 import org.postgresql.ds.PGPoolingDataSource;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
-public class LikedDAOSQL implements LikedDAO{
+public class LikedDAOSQL implements LikedDAO {
   private PGPoolingDataSource source;
   public LikedDAOSQL() {
     source = new PGPoolingDataSource();
@@ -46,8 +43,5 @@ public class LikedDAOSQL implements LikedDAO{
     }
   }
 
-  @Override
-  public void dislike(int likerId, int likedId, boolean didLike) {
 
-  }
 }

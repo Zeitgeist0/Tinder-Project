@@ -9,13 +9,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 public class UsersServlet extends HttpServlet {
   private TemplateEngine templateEngine;
@@ -31,6 +27,9 @@ private  LikedServiceSQL likedServiceSQL;
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     HashMap<String, Object> data = new HashMap<>();
     List<Profile> profiles = profileServiceSQL.findNotLiked(1);
+    if (profiles.isEmpty()) {
+      templateEngine.render("liked.ftl", resp);
+    }
     Profile profile = profiles.get(0);
     data.put("profile", profile);
     templateEngine.render("users.ftl", data, resp);

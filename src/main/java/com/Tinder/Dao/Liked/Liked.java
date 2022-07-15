@@ -1,6 +1,5 @@
 package com.Tinder.Dao.Liked;
 
-import com.Tinder.Dao.Profile.Profile;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.SneakyThrows;
