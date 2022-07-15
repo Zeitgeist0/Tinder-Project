@@ -31,6 +31,9 @@ private  LikedServiceSQL likedServiceSQL;
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     HashMap<String, Object> data = new HashMap<>();
     List<Profile> profiles = profileServiceSQL.findNotLiked(1);
+    if (profiles.isEmpty()) {
+      templateEngine.render("liked.ftl", resp);
+    }
     Profile profile = profiles.get(0);
     data.put("profile", profile);
     templateEngine.render("users.ftl", data, resp);
