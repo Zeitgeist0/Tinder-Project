@@ -35,7 +35,7 @@ private  LikedServiceSQL likedServiceSQL;
       data.put("profiles", likedProfiles);
       templateEngine.render("liked.ftl", data, resp);
     }
-    Profile profile = notLikedProfiles.iterator().next();
+    Profile profile = notLikedProfiles.get(0);
     data.put("profile", profile);
     data.put("sessionId", (int) sessionId);
     templateEngine.render("users.ftl", data, resp);
@@ -50,14 +50,34 @@ private  LikedServiceSQL likedServiceSQL;
       data.put("profiles", likedProfiles);
       templateEngine.render("liked.ftl", data, resp);
     }
+
+    if(notLikedProfiles.size() == 1) {
+      String likerId = req.getParameter("likerId");
+      String likedId = req.getParameter("likedId");
+      String action = req.getParameter("action");
+      int likerToInt = Integer.parseInt(likerId);
+      int likedToInt = Integer.parseInt(likedId);
+      boolean didLike;
+      if (action.equals("like"))
+      {
+        didLike = true;
+        likedServiceSQL.like(likerToInt,likedToInt,didLike);
+      } else {
+        didLike = false;
+        likedServiceSQL.like(likerToInt,likedToInt,didLike);
+      }
+      List<Profile> likedProfiles = profileServiceSQL.getLikedProfiles((int)sessionId);
+      data.put("profiles", likedProfiles);
+      templateEngine.render("liked.ftl", data, resp);
+    }
 String likerId = req.getParameter("likerId");
 String likedId = req.getParameter("likedId");
-String liked = req.getParameter("liked");
+String action = req.getParameter("action");
 
 int likerToInt = Integer.parseInt(likerId);
     int likedToInt = Integer.parseInt(likedId);
     boolean didLike;
-  if (liked.equals("like"))
+  if (action.equals("like"))
   {
     didLike = true;
     likedServiceSQL.like(likerToInt,likedToInt,didLike);
@@ -68,7 +88,7 @@ int likerToInt = Integer.parseInt(likerId);
 
 
 
-    Profile profile = notLikedProfiles.iterator().next();
+    Profile profile = notLikedProfiles.get(1);
     data.put("sessionId", (int) sessionId);
     data.put("profile", profile);
     templateEngine.render("users.ftl", data, resp);

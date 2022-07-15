@@ -15,7 +15,7 @@
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="/assets/style.css">
 </head>
-
+<body style="background-color: #f5f5f5;">
 
 <div class="col-4 offset-4">
     <div class="card">
@@ -23,20 +23,25 @@
             <div class="row">
                 <div class="col-12 col-lg-12 col-md-12 text-center">
                     <img src="${profile.photo}" alt="" class="mx-auto rounded-circle img-fluid">
-                    <h3 class="mb-0 text-truncated">${profile.name}</h3>
-                    <h3 class="mb-0 text-truncated">${profile.age}</h3>
+
+                    <h3 class="mb-0 text-truncated">${profile.name} ${profile.age}</h3>
                     <br>
                 </div>
-                <form action="/users" method="post">
+                <div class="col-12 col-lg-6">
 
-                    <input type="hidden" name="likerId" value="${sessionId}" /> <br/>
-                    <input type="hidden" name="likedId" value="${profile.id}"  /> <br/>
-                    <div class="col-12 col-lg-6">
-                        <button type="submit" name="liked" value="dislike" class="btn btn-outline-danger btn-block"><span class="fa fa-times"></span> Dislike</button>
-                        <button type="submit" name="liked" value="like" class="btn btn-outline-success btn-block"><span class="fa fa-heart"></span> Like</button>
-                    </div>
-                </form>
-
+                    <form action="/users" method="post">
+                        <input type="hidden" name="likerId" value="${sessionId}"  /> <br/>
+                        <input type="hidden" name="likedId" value="${profile.id}"  /> <br/>
+                        <button type="submit" name="action" value="dislike" class="btn btn-outline-danger btn-block"><span class="fa fa-times"></span> Dislike</button>
+                    </form>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <form action="/users" method="post">
+                        <input type="hidden" name="likerId" value="${sessionId}"  /> <br/>
+                        <input type="hidden" name="likedId" value="${profile.id}"  /> <br/>
+                        <button type="submit" name="action" value="like" class="btn btn-outline-success btn-block"><span class="fa fa-heart"></span> Like</button>
+                    </form>
+                </div>
                 <!--/col-->
             </div>
             <!--/row-->
@@ -46,6 +51,4 @@
 </div>
 
 </body>
-
-
 </html>
