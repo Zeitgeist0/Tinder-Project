@@ -33,16 +33,18 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HashMap<String, Object> data = new HashMap<>();
-        List<Profile> notLikedprofiles = userService.findNotLiked(1);
-        if(notLikedprofiles.isEmpty()) {
-            HttpSession session = req.getSession();
-            long profileId = (long) session.getAttribute("id");
-           List<Profile> likedProfiles =  userService.getLikedProfiles((int)profileId);
+        HttpSession session = req.getSession();
+        long sessionId = (long) session.getAttribute("id");
+        List<Profile> notLikedProfiles = userService.findNotLiked((int) sessionId);
+        if(notLikedProfiles.isEmpty()) {
+
+           List<Profile> likedProfiles =  userService.getLikedProfiles((int)sessionId);
             data.put("profiles", likedProfiles);
             templateEngine.render("liked.ftl", data, resp);
         }
-        Profile profile = notLikedprofiles.get(0);
+        Profile profile = notLikedProfiles.iterator().next();
         data.put("profile", profile);
+        data.put("sessionId",(int) sessionId);
         templateEngine.render("users.ftl", data, resp);
     }
 }

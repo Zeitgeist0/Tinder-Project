@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -26,23 +27,37 @@ private  LikedServiceSQL likedServiceSQL;
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     HashMap<String, Object> data = new HashMap<>();
-    List<Profile> profiles = profileServiceSQL.findNotLiked(1);
-    if (profiles.isEmpty()) {
-      templateEngine.render("liked.ftl", resp);
+    HttpSession session = req.getSession();
+    long sessionId = (long) session.getAttribute("id");
+    List<Profile> notLikedProfiles = profileServiceSQL.findNotLiked((int)sessionId);
+    if (notLikedProfiles.isEmpty()) {
+      List<Profile> likedProfiles = profileServiceSQL.getLikedProfiles((int)sessionId);
+      data.put("profiles", likedProfiles);
+      templateEngine.render("liked.ftl", data, resp);
     }
-    Profile profile = profiles.get(0);
+    Profile profile = notLikedProfiles.iterator().next();
     data.put("profile", profile);
+    data.put("sessionId", (int) sessionId);
     templateEngine.render("users.ftl", data, resp);
   }
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    HashMap<String, Object> data = new HashMap<>();
+    HttpSession session = req.getSession();
+    long sessionId = (long) session.getAttribute("id");
+    List<Profile> notLikedProfiles = profileServiceSQL.findNotLiked((int)sessionId);
+    if (notLikedProfiles.isEmpty()) {
+      List<Profile> likedProfiles = profileServiceSQL.getLikedProfiles((int)sessionId);
+      data.put("profiles", likedProfiles);
+      templateEngine.render("liked.ftl", data, resp);
+    }
 String likerId = req.getParameter("likerId");
 String likedId = req.getParameter("likedId");
-String action = req.getParameter("action");
-    System.out.println(action);
+String liked = req.getParameter("liked");
+
 int likerToInt = Integer.parseInt(likerId);
     int likedToInt = Integer.parseInt(likedId);
     boolean didLike;
-  if (action.equals("like"))
+  if (liked.equals("like"))
   {
     didLike = true;
     likedServiceSQL.like(likerToInt,likedToInt,didLike);
@@ -50,9 +65,11 @@ int likerToInt = Integer.parseInt(likerId);
     didLike = false;
     likedServiceSQL.like(likerToInt,likedToInt,didLike);
   }
-    HashMap<String, Object> data = new HashMap<>();
-    List<Profile> profiles = profileServiceSQL.findNotLiked(1);
-    Profile profile = profiles.get(0);
+
+
+
+    Profile profile = notLikedProfiles.iterator().next();
+    data.put("sessionId", (int) sessionId);
     data.put("profile", profile);
     templateEngine.render("users.ftl", data, resp);
   }
