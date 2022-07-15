@@ -21,5 +21,18 @@ public class FileServlet extends HttpServlet {
       resp.setStatus(404);
     }
   }
+  @Override
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    try (ServletOutputStream os = resp.getOutputStream()) {
+      String rqName = req.getRequestURI();
+      ClassLoader classLoader = this.getClass().getClassLoader();
+
+      byte[] bytes = classLoader.getResourceAsStream(rqName.substring(1)).readAllBytes();
+      os.write(bytes);
+
+    } catch (NullPointerException ex) {
+      resp.setStatus(404);
+    }
+  }
 
 }

@@ -124,7 +124,7 @@
                             <input type="text" class="border-0" placeholder=" Send message" />
                         </div>
                         <div class="col-md-3 text-right options-right">
-                            <i class="fa fa-picture-o mr-2"></i>
+                            <i class="fa fa-picture-o mr-2">Send</i>
                         </div>
                     </div>
                 </div>

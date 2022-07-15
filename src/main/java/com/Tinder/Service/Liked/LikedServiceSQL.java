@@ -1,8 +1,6 @@
 package com.Tinder.Service.Liked;
 
-import com.Tinder.Dao.Liked.Liked;
 import com.Tinder.Dao.Liked.LikedDAO;
-import com.Tinder.Dao.Profile.ProfileDAO;
 
 public class LikedServiceSQL implements LikedService{
   private LikedDAO likedDAO;
