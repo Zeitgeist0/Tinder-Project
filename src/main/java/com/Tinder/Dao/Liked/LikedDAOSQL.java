@@ -46,8 +46,5 @@ public class LikedDAOSQL implements LikedDAO{
     }
   }
 
-  @Override
-  public void dislike(int likerId, int likedId, boolean didLike) {
 
-  }
 }

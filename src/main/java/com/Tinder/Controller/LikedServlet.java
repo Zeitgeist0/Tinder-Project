@@ -29,8 +29,11 @@ public class LikedServlet extends HttpServlet {
   @SneakyThrows
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    HashMap<String, Object> data = new HashMap<>();
+    List<Profile> profiles = profileServiceSQL.getLikedProfiles(1);
 
-    templateEngine.render("like-page.ftl", resp);
+    data.put("profiles", profiles);
+    templateEngine.render("liked.ftl", data, resp);
   }
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

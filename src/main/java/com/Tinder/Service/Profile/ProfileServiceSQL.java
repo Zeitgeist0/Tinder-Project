@@ -25,4 +25,9 @@ public class ProfileServiceSQL implements ProfileService{
   public List<Profile> findNotLiked(int profileId) {
     return profileDAO.findNotLiked(profileId);
   }
+
+  @Override
+  public List<Profile> getLikedProfiles(int profileId) {
+    return  profileDAO.getLikedProfiles(profileId);
+  }
 }
