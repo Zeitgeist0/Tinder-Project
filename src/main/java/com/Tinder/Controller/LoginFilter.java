@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Set;
 
 //@WebFilter(urlPatterns = "/*")
 public class LoginFilter implements Filter {
@@ -31,15 +33,13 @@ public class LoginFilter implements Filter {
                          FilterChain chain) throws ServletException, IOException {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) resp;
-        if (  (request.getPathInfo() != null &&
-                request.getPathInfo().split("/").length > 1 )
-                &&
-                (  request.getPathInfo().split("/")[1].equals("css") ||
-                        request.getPathInfo().split("/")[1].equals("js") ||
-                        (request.getServletPath() != null && request.getServletPath().equals("/registration"))))
-        {
+        Set<String> allowedUrls = Set.of("/assets", "/assets/style.css", "/assets/bootstrap.min.css");
+
+        if (allowedUrls.contains(request.getServletPath()) ) {
             chain.doFilter(request, response);
         }
+
+
         if (request.getSession(false) == null) {
             String login = request.getParameter("email");
             String password = request.getParameter("password");
@@ -48,10 +48,11 @@ public class LoginFilter implements Filter {
             if (user != null) {
                 HttpSession session = request.getSession();
                 session.setAttribute("id", user.getId());
+
                 chain.doFilter(request, response);
-//                request.getRequestDispatcher("/hello").forward(request, response);
             }
-            //request.getRequestDispatcher("/login").forward(request, response);
+
+
             templateEngine.render("login.ftl", response);
         }
         chain.doFilter(request, response);

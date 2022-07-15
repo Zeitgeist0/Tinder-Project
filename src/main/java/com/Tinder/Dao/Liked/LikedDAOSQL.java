@@ -28,7 +28,7 @@ public class LikedDAOSQL implements LikedDAO {
       preparedStatement.setLong(1, likerId);
       preparedStatement.setLong(2, likedId);
       preparedStatement.setBoolean(3, didLike);
-      ResultSet resultSet = preparedStatement.executeQuery();
+       preparedStatement.executeQuery();
 
     } catch (SQLException e) {
       e.printStackTrace();

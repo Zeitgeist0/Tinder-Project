@@ -17,6 +17,7 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 
 import javax.servlet.DispatcherType;
+import javax.servlet.http.HttpServlet;
 import java.util.EnumSet;
 
 
@@ -38,6 +39,8 @@ public class JettyRun {
 
     MessagesJdbcDao messagesJdbcDao = new MessagesJdbcDao();
     MessagesService messagesService = new MessagesJdbcService(messagesJdbcDao);
+
+
 
     SessionHandler sessionHandler = new SessionHandler();
     handler.setSessionHandler(sessionHandler);
