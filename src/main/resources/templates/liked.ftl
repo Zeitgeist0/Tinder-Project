@@ -40,9 +40,15 @@
                                             ${profile.name}
                                         </td>
                                         <td class="align-middle">
-                                           ${profile.age}
+                                          Age: ${profile.age}
+                                        </td>
+                                        <td class="align-middle">
+                                            <a style="text-decoration: none;" href="/messages/${profile.id} ">
+                                                <button  class="btn btn-outline-success btn-block"></span> Send a message</button>
+                                            </a>
                                         </td>
                                     </tr>
+
                                 </#items>
                             </#list>
                         </table>
