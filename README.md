@@ -21,6 +21,8 @@ There are some styling issues due to changes made by Heroku.
 /Technical specifications
 - Application runs on Jetty webserver with Servlets. 
 - MVC design pattern was used to split the application between DAO/Service/Controller layers.
+- Postgre database provided by Heroku was used to store all the information
+- JDBC was used to connect to the database and write SQL queries.
 - A filter was added which will redirect any  unauthorized request to the login page.
 - FreeMarker was used to dinamically insert parameters into the HTML pages
-- Postgre database provided by Heroku was used to store all the information
+
