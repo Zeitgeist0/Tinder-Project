@@ -1,5 +1,5 @@
 # Tinder-Project
-Deployed on Heroku
+Deployed on Heroku, you can see the project following this link:
 
 https://agile-crag-34919.herokuapp.com/
 
