@@ -15,7 +15,8 @@ joe.anthony@gmail.com
 
 Password: 1111
 
--After the log in, you can like/dislike several profiles. When you have taken a decision on all the available profiles (around 10), you will be redirected to the "Messages" page, where you will see all the profiles that you have liked. Also you will be able to chat with them, and the conversations will be saved in the database.
+-After the log in, you can like/dislike several profiles. When you have taken a decision on all the available profiles (around 10), you will be redirected to the "Messages" page, where you will see only the profiles that you have liked. Also you will be able to chat with them, and the conversations will be saved in the database.
+There are some styling issues due to changes made by Heroku.
 
 /Technical specifications
 - Application runs on Jetty webserver with Servlets. 
